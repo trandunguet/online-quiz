@@ -59,15 +59,15 @@
                <div class="popup">
                   <!--login form-->
                   <div class="letter-w3ls">
-                     <form action="/api/signup" method="post">
+                     <form action="/api/user/signup" method="post">
                         <div class="form-left-to-w3l">
                            <input type="text" name="name" placeholder="Username" required="">
                         </div>
                         <div class="form-left-to-w3l">
-                           <input type="password" name="password" placeholder="Password" required="">
+                           <input type="password" id="signup_password" name="password" placeholder="Password" required="">
                         </div>
                         <div class="form-left-to-w3l margin-zero">
-                           <input type="password" name="password" placeholder="Confirm Password" required="">
+                           <input type="password" id="signup_password_confirm" placeholder="Confirm Password" required="">
                         </div>
                         <div class="btnn">
                            <button type="submit">Sign Up</button>
@@ -94,5 +94,20 @@
             <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a>
          </p>
       </footer>
+      <script>
+         var password = document.getElementById("signup_password")
+         , confirm_password = document.getElementById("signup_password_confirm");
+
+         function validatePassword(){
+         if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+         } else {
+            confirm_password.setCustomValidity('');
+            }
+         }
+
+         password.onchange = validatePassword;
+         confirm_password.onkeyup = validatePassword;
+      </script>
    </body>
 </html>
