@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+var session = require('express-session');
+
 
 mongoose.connect('mongodb://localhost:27017/online-quiz', { useNewUrlParser: true, useCreateIndex: true }, (err) => {
     if (err) {
@@ -16,6 +18,12 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
 var app = express();
+
+app.use(session({
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+    secret: 'shhhh, very secret'
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

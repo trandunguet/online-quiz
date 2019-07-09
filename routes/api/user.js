@@ -7,18 +7,24 @@ var router = express.Router();
 var User = mongoose.model('User', userSchema);
 
 router.post('/login', function (req, res, next) {
+    if (req.session.user) {
+        console.log('already logged in');
+    }
     User.findOne({username: req.body.username}, (err, user) => {
         if (err) {
             console.log(err);
             return;
         }
         if (user && req.body.password == user.password) {
-            console.log('found one');
+            req.session.regenerate(function(){
+                req.session.user = user.username;
+                res.redirect('../../');
+            });
         } else {
             console.log('not found');
+            res.redirect('../../login');
         }
     });
-    res.redirect('../../signup-login');
 });
 
 router.post('/signup', function (req, res, next) {
@@ -26,7 +32,7 @@ router.post('/signup', function (req, res, next) {
     {
         console.log(err);
     });
-    res.redirect('../../signup-login');
+    res.redirect('../../login');
 });
 
 module.exports = router;
