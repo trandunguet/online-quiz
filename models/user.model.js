@@ -13,4 +13,6 @@ var userSchema = new Schema({
     }
 });
 
+userSchema.set('toJSON', { virtuals: true });
+
 module.exports = userSchema;
