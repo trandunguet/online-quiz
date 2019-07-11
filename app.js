@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    app.set('db_url', 'mongodb://<dbuser>:<dbpassword>@ds249127.mlab.com:49127/heroku_5dl6q79h');
+    app.set('db_url', 'mongodb://admin:qwerty123456@ds249127.mlab.com:49127/heroku_5dl6q79h');
 }
 
 console.log(process.env.NODE_ENV);
