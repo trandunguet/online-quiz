@@ -6,18 +6,27 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 var session = require('express-session');
 
-
-mongoose.connect('mongodb://localhost:27017/online-quiz', { useNewUrlParser: true, useCreateIndex: true }, (err) => {
-    if (err) {
-        console.log(err);
-    }
-});
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
 var app = express();
+
+if (process.env.NODE_ENV === 'development') {
+    app.set('db_url', 'mongodb://localhost:27017/online-quiz');
+}
+
+if (process.env.NODE_ENV === 'production') {
+    app.set('db_url', 'mongodb://<dbuser>:<dbpassword>@ds249127.mlab.com:49127/heroku_5dl6q79h');
+}
+
+console.log(process.env.NODE_ENV);
+
+mongoose.connect(app.get('db_url'), { useNewUrlParser: true, useCreateIndex: true }, (err) => {
+    if (err) {
+        console.log(err);
+    }
+});
 
 app.use(session({
     resave: false, // don't save session if unmodified
