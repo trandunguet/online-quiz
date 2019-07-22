@@ -21,8 +21,7 @@ router.post('/login', function (req, res, next) {
                 res.redirect('../../');
             });
         } else {
-            console.log('not found');
-            res.redirect('../../login');
+            res.redirect('../../login?error=denied');
         }
     });
 });
@@ -30,9 +29,11 @@ router.post('/login', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
     User.create({username: req.body.username, password: req.body.password}, function(err, _)
     {
-        console.log(err);
+        if (err)
+            res.redirect('../../login?error=username#signup');
+        else
+            res.redirect('../../login');
     });
-    res.redirect('../../login');
 });
 
 module.exports = router;

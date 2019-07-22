@@ -26,6 +26,7 @@
       <div class="mid-class">
          <div class="art-right-w3ls">
             <h2>Sign In and Sign Up</h2>
+            <h3 id="login-message" style="color: red"></h3>
             <form action="/api/user/login" method="post">
                <div class="main">
                   <div class="form-left-to-w3l">
@@ -59,6 +60,7 @@
                <div class="popup">
                   <!--login form-->
                   <div class="letter-w3ls">
+                     <h3 id="signup-message" style="color: red"></h3>
                      <form action="/api/user/signup" method="post">
                         <div class="form-left-to-w3l">
                            <input type="text" name="username" placeholder="Username" required="">
@@ -108,6 +110,13 @@
 
          password.onchange = validatePassword;
          confirm_password.onkeyup = validatePassword;
+
+         var url = new URL(window.location.href);
+         var error = url.searchParams.get("error");
+         if (error == "denied")
+            document.getElementById("login-message").innerText = "Incorrect username and password";
+         else if (error == "username")
+            document.getElementById("signup-message").innerText = "Username is already taken";
       </script>
    </body>
 </html>
