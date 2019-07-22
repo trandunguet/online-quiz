@@ -10,30 +10,41 @@ router.post('/login', function (req, res, next) {
     if (req.session.user) {
         console.log('already logged in');
     }
-    User.findOne({username: req.body.username}, (err, user) => {
+    User.findOne({ username: req.body.username }, (err, user) => {
         if (err) {
             console.log(err);
             return;
         }
         if (user && req.body.password == user.password) {
-            req.session.regenerate(function(){
+            req.session.regenerate(function () {
                 req.session.user = user.username;
-                res.redirect('../../');
+                res.redirect('/');
             });
         } else {
-            res.redirect('../../login?error=denied');
+            res.redirect('/login?error=denied');
         }
     });
 });
 
 router.post('/signup', function (req, res, next) {
-    User.create({username: req.body.username, password: req.body.password}, function(err, _)
-    {
+    User.create({ username: req.body.username, password: req.body.password }, function (err, _) {
         if (err)
-            res.redirect('../../login?error=username#signup');
+            res.redirect('/login?error=username#signup');
         else
-            res.redirect('../../login');
+            res.redirect('/login');
     });
+});
+
+router.get('/logout', function (req, res, next) {
+    if (req.session) {
+        req.session.destroy(function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                return res.redirect('/');
+            }
+        });
+    }
 });
 
 module.exports = router;
