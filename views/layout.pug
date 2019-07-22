@@ -9,10 +9,17 @@ html
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
   body
     nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.fixed-top
-      a.navbar-brand.nav-link(href='#') Online Quiz
-      ul.navbar-nav
+      a.navbar-brand.nav-link(href='/') Online Quiz
+      ul.navbar-nav.mr-auto
         li.nav-item
-          a.nav-link(href='#') Link
+          a.nav-link(href='#') My question bank
+        li.nav-item
+          a.nav-link(href='#') My quizzes
+
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link(href='#') Hello, !{user}
         li.nav-item
           a.nav-link(href='/logout') Logout
+
     block content
