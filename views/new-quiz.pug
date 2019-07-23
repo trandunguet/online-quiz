@@ -9,5 +9,5 @@ block content
     form(action='/new-quiz', method='post')
       .form-group
         label(for='quiz-name') Quiz name:
-        input#quiz-name.form-control(type='text', required)
+        input.form-control(type='text', name='quizName' required)
       button.btn.btn-primary(type='submit') Create

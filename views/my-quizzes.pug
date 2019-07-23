@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .jumbotron.jumbotron-fluid
+    .container
+      h1 My quizzes
+
+  .container
+    ul.list-group
+      each quiz in quizzes
+        li.list-group-item= quiz
