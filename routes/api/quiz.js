@@ -28,4 +28,22 @@ router.post('/new-quiz', function (req, res, next) {
     });
 });
 
+router.post('/new-question', function(req, res, next) {
+    username = req.session.user;
+    if (!username) return res.redirect('/login');
+
+    User.findOne({ username: username }, function (err, user) {
+        question = new Question({
+            stem: req.body.stem,
+            key: req.body.key
+        });
+        question.save(function (err) {
+            if (err) return console.log(err);
+            user.questions.push(question._id);
+            user.save();
+            res.redirect('#');
+        })
+    })
+});
+
 module.exports = router;

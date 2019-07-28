@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .jumbotron.jumbotron-fluid
+    .container
+      h1 My question bank
+      a.btn.btn-primary(href='/new-question') New question
+
+  .container
+    each question, index in questions
+      .card.mb-4
+        .card-body
+          h5.card-title Question !{index}
+          p.card-text= question.stem
+          hr
+          h5.card-title Key
+          p.card-text= question.key

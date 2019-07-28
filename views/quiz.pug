@@ -4,6 +4,11 @@ block content
   .jumbotron.jumbotron-fluid
     .container
       h1 !{quiz.name}
+      div.dropdown
+        button#addQuestion.btn.btn-primary.dropdown-toggle(data-toggle='dropdown') Add question
+        div.dropdown-menu(aria-labelledby='addQuestion')
+          a.dropdown-item(href='#') Create new
+          a.dropdown-item(href='#') Add from question bank
 
   .container
     ul.list-group
