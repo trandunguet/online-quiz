@@ -7,8 +7,6 @@ const mongoose = require('mongoose');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var newQuizRouter = require('./routes/new-quiz');
-var myQuizRouter = require('./routes/my-quizzes');
 var apiRouter = require('./routes/api');
 
 var app = express();
@@ -46,8 +44,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/new-quiz', newQuizRouter);
-app.use('/my-quizzes', myQuizRouter);
 app.use(apiRouter);
 
 // catch 404 and forward to error handler

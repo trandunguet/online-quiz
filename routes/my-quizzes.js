@@ -8,7 +8,7 @@ var User = mongoose.model('User', userSchema);
 var Quiz = mongoose.model('Quiz', quizSchema);
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/my-quizzes', function (req, res, next) {
     var username = req.session.user;
     if (!username) {
         return res.redirect('/login');
