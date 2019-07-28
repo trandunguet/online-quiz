@@ -13,7 +13,7 @@ router.get('/quiz/:quizId', function (req, res, next) {
     if (!username) return res.redirect('/login');
     Quiz.findById(req.params.quizId).populate('questions').exec(function (err, quiz) {
         if (err) return console.log(err);
-        res.render('quiz', { quiz: quiz });
+        res.render('quiz', { user: username, quiz: quiz });
     });
 });
 
