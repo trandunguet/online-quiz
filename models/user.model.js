@@ -12,14 +12,14 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    quizzes: {
-        type: [ObjectId],
-        required: true
-    },
-    questions: {
-        type: [ObjectId],
-        required: true
-    }
+    quizzes: [{
+        type: ObjectId,
+        ref: 'Quiz'
+    }],
+    questions: [{
+        type: ObjectId,
+        ref: 'Question'
+    }]
 });
 
 module.exports = userSchema;

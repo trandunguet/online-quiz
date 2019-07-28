@@ -13,20 +13,12 @@ router.get('/', function (req, res, next) {
     if (!username) {
         return res.redirect('/login');
     }
-    User.findOne({ username: username }, (err, user) => {
+    User.findOne({ username: username }).populate('quizzes').exec(function (err, user) {
         if (err) {
             console.log(err);
             return res.redirect('/');
         }
-        var quizzes = [];
-        user.quizzes.forEach(quizID => {
-            Quiz.findById(quizID, (err, quiz) => {
-                quizzes.push(quiz.name);
-                if (quizzes.length == user.quizzes.length) {
-                    res.render('my-quizzes', { user: user.username, quizzes: quizzes });
-                }
-            })
-        });
+        res.render('my-quizzes', { user: user.username, quizzes: user.quizzes });
     });
 });
 

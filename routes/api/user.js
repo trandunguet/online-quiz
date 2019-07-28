@@ -7,42 +7,30 @@ var router = express.Router();
 var User = mongoose.model('User', userSchema);
 
 router.post('/login', function (req, res, next) {
-    if (req.session.user) {
-        console.log('already logged in');
-    }
-    User.findOne({ username: req.body.username }, (err, user) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
+    User.findOne({ username: req.body.username }, function (err, user) {
+        if (err) return console.log(err);
         if (user && req.body.password == user.password) {
             req.session.regenerate(function () {
                 req.session.user = user.username;
-                res.redirect('/');
+                return res.redirect('/');
             });
-        } else {
-            res.redirect('/login?error=denied');
         }
+        else return res.redirect('/login?error=denied');
     });
 });
 
 router.post('/signup', function (req, res, next) {
     User.create({ username: req.body.username, password: req.body.password }, function (err, _) {
-        if (err)
-            res.redirect('/login?error=username#signup');
-        else
-            res.redirect('/login');
+        if (err) return res.redirect('/login?error=username#signup');
+        else return res.redirect('/login');
     });
 });
 
 router.get('/logout', function (req, res, next) {
     if (req.session) {
         req.session.destroy(function (err) {
-            if (err) {
-                return next(err);
-            } else {
-                return res.redirect('/');
-            }
+            if (err) return next(err);
+            else return res.redirect('/');
         });
     }
 });

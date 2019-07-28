@@ -3,9 +3,9 @@ extends layout
 block content
   .jumbotron.jumbotron-fluid
     .container
-      h1 My quizzes
+      h1 !{quizName}
 
   .container
     ul.list-group
-      each quiz in quizzes
-        li.list-group-item !{quiz.name}
+      each question in questions
+        li.list-group-item !{question.stem}

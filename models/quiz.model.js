@@ -7,10 +7,10 @@ var quizSchema = new Schema({
         type: String,
         required: true
     },
-    questions: {
-        type: [ObjectId],
-        required: true
-    }
+    questions: [{
+        type: ObjectId,
+        ref: 'Question'
+    }]
 });
 
 module.exports = quizSchema;
