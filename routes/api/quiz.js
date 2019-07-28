@@ -23,9 +23,9 @@ router.post('/new-quiz', function (req, res, next) {
             if (err) return console.log(err);
             user.quizzes.push(quiz._id);
             user.save();
+            res.redirect('/quiz/' + quiz._id);
         });
     });
-    res.redirect('/new-quiz');
 });
 
 module.exports = router;

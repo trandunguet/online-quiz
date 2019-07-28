@@ -8,16 +8,12 @@ var User = mongoose.model('User', userSchema);
 var Quiz = mongoose.model('Quiz', quizSchema);
 
 /* GET home page. */
-router.get('/my-quizzes', function (req, res, next) {
+router.get('/quiz/:quizId', function (req, res, next) {
     var username = req.session.user;
     if (!username) return res.redirect('/login');
-    
-    User.findOne({ username: username }).populate('quizzes').exec(function (err, user) {
-        if (err) {
-            console.log(err);
-            return res.redirect('/');
-        }
-        res.render('my-quizzes', { user: user.username, quizzes: user.quizzes });
+    Quiz.findById(req.params.quizId).populate('questions').exec(function (err, quiz) {
+        if (err) return console.log(err);
+        res.render('quiz', { quiz: quiz });
     });
 });
 
