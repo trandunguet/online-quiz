@@ -9,7 +9,7 @@ block content
     form(action='/new-question', method='post')
       .form-group
         label(for='stem') Question:
-        input#stem.form-control(type='text', name='stem' required)
+        textarea#stem.form-control(name='stem', rows='5', required)
       .form-group
         label(for='key') Key:
         input#key.form-control(type='text', name='key' required)
