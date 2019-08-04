@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .jumbotron.jumbotron-fluid
+    .container
+      h1 !{quiz.name}
+      button.btn.btn-primary(onclick='submit()') Submit
+
+  .container
+    form(action='/attempt/' + quiz._id, method='post', name='attempt')
+      each question, index in quiz.questions
+        .card.mb-3
+          .card-body
+            h5.card-title Question !{index}
+            p.card-text= question.stem
+            hr
+            h5.card-title Answer
+            input.form-control(type='text', name=question._id)
+
+    button.btn.btn-primary(onclick='submit()') Submit
+
+  script.
+    function submit() {
+      document.forms.attempt.submit();
+    }

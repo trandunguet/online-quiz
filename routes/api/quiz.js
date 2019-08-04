@@ -54,4 +54,21 @@ router.post('/new-question', function(req, res, next) {
     })
 });
 
+router.post('/attempt/:quizId', function(req, res, next) {
+    username = req.session.user;
+    if (!username) return res.redirect('/login');
+
+    Quiz.findById(req.params.quizId).populate('questions').exec(function(err, quiz) {
+        var score = 0;
+        quiz.questions.forEach(question => {
+            if (question.key == req.body[question._id]) {
+                score += 1;
+            }
+        });
+        quiz.results.push({ user: username, date: new Date(), score: score })
+        quiz.save();
+        res.redirect('/quiz/' + quiz._id + '/results');
+    })
+})
+
 module.exports = router;

@@ -10,6 +10,11 @@ var quizSchema = new Schema({
     questions: [{
         type: ObjectId,
         ref: 'Question'
+    }],
+    results: [{
+        user: String,
+        date: Date,
+        score: Number
     }]
 });
 

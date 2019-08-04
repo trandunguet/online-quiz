@@ -4,11 +4,15 @@ block content
   .jumbotron.jumbotron-fluid
     .container
       h1 !{quiz.name}
-      div.dropdown
-        button#addQuestion.btn.btn-primary.dropdown-toggle(data-toggle='dropdown') Add question
-        div.dropdown-menu(aria-labelledby='addQuestion')
-          a.dropdown-item(href='/new-question?quiz=' + quiz._id) Create new
-          a.dropdown-item(href='#') Add from question bank
+      .btn-group(role='group')
+        a.btn.btn-primary(href='/attempt/' + quiz._id) Attempt
+        a.btn.btn-secondary(href='/quiz/' + quiz._id + '/results') Results
+        .btn-group(role='group')
+          button#addQuestion.btn.btn-secondary.dropdown-toggle(data-toggle='dropdown', type='button') Add question
+          .dropdown-menu(aria-labelledby='addQuestion')
+            a.dropdown-item(href='/new-question?quiz=' + quiz._id) Create new
+            a.dropdown-item(href='#') Add from question bank
+
 
   .container
     each question, index in quiz.questions

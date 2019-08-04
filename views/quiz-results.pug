@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .jumbotron.jumbotron-fluid
+    .container
+      h1 !{quiz.name} results
+
+  .container
+    ul.list-group
+      each result in quiz.results.reverse()
+        .list-group-item.list-group-item-action
+          h5 User: !{result.user}
+          p Date: !{result.date}
+          p Score: !{result.score} / !{quiz.questions.length}
