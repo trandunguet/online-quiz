@@ -71,4 +71,13 @@ router.post('/attempt/:quizId', function(req, res, next) {
     })
 })
 
+router.get('/quiz/:quizId/delete', function(req, res, next) {
+    username = req.session.user;
+    if (!username) return res.redirect('/login');
+
+    Quiz.findByIdAndRemove(req.params.quizId, function(err, quiz) {
+        res.redirect('/my-quizzes');
+    });
+}) 
+
 module.exports = router;

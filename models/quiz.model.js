@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var userSchema = require('./user.model');
+var User = mongoose.model('User', userSchema);
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -16,6 +18,14 @@ var quizSchema = new Schema({
         date: Date,
         score: Number
     }]
+});
+
+quizSchema.pre('remove', function(next) {
+    User.update(
+        { quizzes : this._id}, 
+        { $pull: { quizzes: this._id } })
+    .exec();
+    next();
 });
 
 module.exports = quizSchema;
