@@ -7,10 +7,15 @@ block content
       div.dropdown
         button#addQuestion.btn.btn-primary.dropdown-toggle(data-toggle='dropdown') Add question
         div.dropdown-menu(aria-labelledby='addQuestion')
-          a.dropdown-item(href='#') Create new
+          a.dropdown-item(href='/new-question?quiz=' + quiz._id) Create new
           a.dropdown-item(href='#') Add from question bank
 
   .container
-    ul.list-group
-      each question in quiz.questions
-        li.list-group-item !{question.stem}
+    each question, index in quiz.questions
+      .card.mb-3
+        .card-body
+          h5.card-title Question !{index}
+          p.card-text= question.stem
+          hr
+          h5.card-title Key
+          p.card-text= question.key

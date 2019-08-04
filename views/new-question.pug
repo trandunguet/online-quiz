@@ -6,11 +6,18 @@ block content
       h1 Create new question
 
   .container
-    form(action='/new-question', method='post')
+    form(action='/new-question', method='post', onsubmit='addQuizId()', name='newQuestion')
       .form-group
         label(for='stem') Question:
         textarea#stem.form-control(name='stem', rows='5', required)
       .form-group
         label(for='key') Key:
         input#key.form-control(type='text', name='key' required)
+      input(type='text', name='quizId' hidden)
       button.btn.btn-primary(type='submit') Create
+
+  script.
+    function addQuizId() {
+      var url = new URL(window.location.href);
+      document.forms.newQuestion.elements.quizId.value = url.searchParams.get('quiz');
+    }

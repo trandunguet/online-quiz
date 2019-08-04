@@ -41,7 +41,15 @@ router.post('/new-question', function(req, res, next) {
             if (err) return console.log(err);
             user.questions.push(question._id);
             user.save();
-            res.redirect('#');
+
+            if (req.body.quizId) {
+                Quiz.findById(req.body.quizId, function(err, quiz) {
+                    quiz.questions.push(question._id);
+                    quiz.save();
+                    res.redirect('/quiz/' + req.body.quizId);
+                })
+            }
+            else res.redirect('/my-question-bank');
         })
     })
 });
