@@ -9,4 +9,6 @@ block content
   .container
     ul.list-group
       each quiz in quizzes
-        a.list-group-item.list-group-item-action(href='/quiz/' + quiz._id) !{quiz.name}
+        a.list-group-item.list-group-item-action(href='/quiz/' + quiz._id)
+          h5 !{quiz.name}
+          p !{quiz.questions.length} questions
