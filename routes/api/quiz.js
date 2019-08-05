@@ -114,4 +114,13 @@ router.get('/quiz/:quizId/add-from-bank/:questionId', function(req, res, next) {
     })
 })
 
+router.get('/question/:questionId/delete', function(req, res, next) {
+    username = req.session.user;
+    if (!username) return res.redirect('/login');
+
+    Question.findByIdAndRemove(req.params.questionId, function(err, question) {
+        res.redirect('/my-question-bank');
+    })
+})
+
 module.exports = router;

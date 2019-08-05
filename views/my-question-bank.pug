@@ -13,8 +13,14 @@ block content
           .d-flex
             h5.card-title Question !{index}
             a.ml-auto.btn.btn-secondary(href='/edit-question/' + question._id) Edit
-            button.ml-2.btn.btn-secondary Delete
+            button.ml-2.btn.btn-secondary(onclick='deleteQuestion("' + question._id + '")') Delete
           p.card-text= question.stem
           hr
           h5.card-title Key
           p.card-text= question.key
+
+  script.
+    function deleteQuestion(id) {
+      if (!confirm("Are you sure?")) return;
+      window.location.replace('/question/' + id + '/delete');
+    }
