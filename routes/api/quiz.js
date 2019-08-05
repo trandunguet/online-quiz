@@ -65,7 +65,7 @@ router.post('/attempt/:quizId', function(req, res, next) {
                 score += 1;
             }
         });
-        quiz.results.push({ user: username, date: new Date(), score: score })
+        quiz.results.push({ user: username, date: new Date(), score: score + ' / ' + quiz.questions.length })
         quiz.save();
         res.redirect('/quiz/' + quiz._id + '/results');
     })

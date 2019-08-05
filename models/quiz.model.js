@@ -16,7 +16,7 @@ var quizSchema = new Schema({
     results: [{
         user: String,
         date: Date,
-        score: Number
+        score: String
     }]
 });
 

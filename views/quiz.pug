@@ -20,7 +20,7 @@ block content
         .card-body
           .d-flex
             h5.card-title Question !{index}
-            button.ml-auto.btn.btn-secondary Edit
+            a.ml-auto.btn.btn-secondary(href='/edit-question/' + question._id) Edit
             button.ml-2.btn.btn-secondary(onclick='deleteQuestion(' + index + ')') Delete
           p.card-text= question.stem
           hr
