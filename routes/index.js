@@ -6,6 +6,7 @@ var quizRouter = require('./quiz');
 var questionBankRouter = require('./my-question-bank');
 var newQuestionRouter = require('./new-question');
 var attemptRouter = require('./attempt');
+var editQuestionRouter = require('./edit-question');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -21,5 +22,6 @@ router.use(quizRouter);
 router.use(questionBankRouter);
 router.use(newQuestionRouter);
 router.use(attemptRouter);
+router.use(editQuestionRouter);
 
 module.exports = router;

@@ -91,4 +91,16 @@ router.get('/quiz/:quizId/delete-question/:index', function(req, res, next) {
     });
 })
 
+router.post('/edit-question/:questionId', function(req, res, next) {
+    username = req.session.user;
+    if (!username) return res.redirect('/login');
+
+    Question.findById(req.params.questionId, function(err, question) {
+        question.stem = req.body.stem;
+        question.key = req.body.key;
+        question.save();
+        res.redirect('/my-question-bank');
+    })
+})
+
 module.exports = router;

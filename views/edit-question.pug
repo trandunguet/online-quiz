@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .jumbotron.jumbotron-fluid
+    .container
+      h1 Edit question
+
+  .container
+    form(action='/edit-question/' + question._id, method='post')
+      .form-group
+        label(for='stem') Question:
+        textarea#stem.form-control(name='stem', rows='5', required) !{question.stem}
+      .form-group
+        label(for='key') Key:
+        input#key.form-control(type='text', name='key' required, value=question.key)
+      button.btn.btn-primary(type='submit') Edit
