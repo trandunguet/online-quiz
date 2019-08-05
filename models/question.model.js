@@ -24,9 +24,10 @@ questionSchema.pre('remove', function(next) {
 
     Quiz.update(
         { questions : this._id }, 
-        { $pull: { questions: this._id } })
-        // { multi : true })
+        { $pull: { questions: this._id } },
+        { multi : true })
     .exec();
+    Quiz.update()
     next();
 });
 

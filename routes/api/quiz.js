@@ -75,7 +75,8 @@ router.get('/quiz/:quizId/delete', function(req, res, next) {
     username = req.session.user;
     if (!username) return res.redirect('/login');
 
-    Quiz.findByIdAndRemove(req.params.quizId, function(err, quiz) {
+    Quiz.findById(req.params.quizId, function(err, quiz) {
+        quiz.remove();
         res.redirect('/my-quizzes');
     });
 })
@@ -118,7 +119,8 @@ router.get('/question/:questionId/delete', function(req, res, next) {
     username = req.session.user;
     if (!username) return res.redirect('/login');
 
-    Question.findByIdAndRemove(req.params.questionId, function(err, question) {
+    Question.findById(req.params.questionId, function(err, question) {
+        question.remove();
         res.redirect('/my-question-bank');
     })
 })
