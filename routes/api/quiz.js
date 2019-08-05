@@ -103,4 +103,15 @@ router.post('/edit-question/:questionId', function(req, res, next) {
     })
 })
 
+router.get('/quiz/:quizId/add-from-bank/:questionId', function(req, res, next) {
+    username = req.session.user;
+    if (!username) return res.redirect('/login');
+
+    Quiz.findById(req.params.quizId, function(err, quiz) {
+        quiz.questions.push(req.params.questionId);
+        quiz.save();
+        res.redirect('/quiz/' + quiz._id);
+    })
+})
+
 module.exports = router;

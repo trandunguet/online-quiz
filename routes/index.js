@@ -7,6 +7,7 @@ var questionBankRouter = require('./my-question-bank');
 var newQuestionRouter = require('./new-question');
 var attemptRouter = require('./attempt');
 var editQuestionRouter = require('./edit-question');
+var addFromBankRouter = require('./add-from-bank');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -23,5 +24,6 @@ router.use(questionBankRouter);
 router.use(newQuestionRouter);
 router.use(attemptRouter);
 router.use(editQuestionRouter);
+router.use(addFromBankRouter);
 
 module.exports = router;
