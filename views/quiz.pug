@@ -18,7 +18,10 @@ block content
     each question, index in quiz.questions
       .card.mb-3
         .card-body
-          h5.card-title Question !{index}
+          .d-flex
+            h5.card-title Question !{index}
+            button.ml-auto.btn.btn-secondary Edit
+            button.ml-2.btn.btn-secondary(onclick='deleteQuestion(' + index + ')') Delete
           p.card-text= question.stem
           hr
           h5.card-title Key
@@ -28,4 +31,9 @@ block content
     function deleteQuiz() {
       if (!confirm("Are you sure?")) return;
       window.location.replace('/quiz/#{quiz.id}/delete');
+    }
+
+    function deleteQuestion(index) {
+      if (!confirm("Are you sure?")) return;
+      window.location.replace('/quiz/#{quiz.id}/delete-question/' + index);
     }

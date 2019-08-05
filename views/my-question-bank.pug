@@ -10,7 +10,10 @@ block content
     each question, index in questions
       .card.mb-3
         .card-body
-          h5.card-title Question !{index}
+          .d-flex
+            h5.card-title Question !{index}
+            button.ml-auto.btn.btn-secondary Edit
+            button.ml-2.btn.btn-secondary Delete
           p.card-text= question.stem
           hr
           h5.card-title Key

@@ -78,6 +78,17 @@ router.get('/quiz/:quizId/delete', function(req, res, next) {
     Quiz.findByIdAndRemove(req.params.quizId, function(err, quiz) {
         res.redirect('/my-quizzes');
     });
-}) 
+})
+
+router.get('/quiz/:quizId/delete-question/:index', function(req, res, next) {
+    username = req.session.user;
+    if (!username) return res.redirect('/login');
+
+    Quiz.findById(req.params.quizId, function(err, quiz) {
+        quiz.questions.splice(req.params.index, 1);
+        quiz.save();
+        res.redirect('/quiz/' + req.params.quizId);
+    });
+})
 
 module.exports = router;
